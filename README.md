@@ -168,7 +168,7 @@ pnpm i stylelint stylelint-config-standard stylelint-config-prettier stylelint-c
 # stylelint-config-recess-order // 配置stylelint css属性书写顺序插件
 # stylelint-config-standard-scss // stylelint-config-standard-scss是stylelint-config-standard的一个scss拓展版本，它的作用是配置Stylelint以检查scss文件的代码风格，使得scss文件更加易读易维护。
 # vue 项目
-pnpm i stylelint-config-html  stylelint-config-recommended-scss stylelint-config-recommended-vue
+pnpm i stylelint-config-html stylelint-config-recommended-scss stylelint-config-recommended-vue postcss-html -D
 # "stylelint-config-html": "^1.1.0",
 # "stylelint-config-recommended-scss": "^9.0.1",
 # "stylelint-config-recommended-vue": "^1.4.0",
@@ -272,16 +272,28 @@ stats.html
 
 ```bash
 # 公共
-pnpm i eslint eslint-config-prettier eslint-plugin-prettier -D
+pnpm i eslint -D
+# eslint # ESLint核心库，必须安装
+# eslint-plugin-import # 支持ES6模块导入语法的规则
+# eslint-plugin-node # 包含了一些与Node.js相关的规则
+# eslint-plugin-standard # 包含了一些与JavaScript Standard Style相关的规则
+
+# prettier
+pnpm i eslint-config-prettier eslint-plugin-prettier -D
+# 只有在使用Prettier作为代码格式化工具时才有意义,否则不会产生任何影响:
+# eslint-config-prettier # 关闭所有与Prettier冲突的eslint规则, 避免与Prettier产生不必要的冲突
+# eslint-plugin-prettier # 将Prettier作为eslint的规则运行, 会运行Prettier进行代码格式化
 
 # Typescript
 pnpm i @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
 
 # vue
-pnpm i eslint-plugin-prettier eslint-plugin-vue -D
+pnpm i eslint-plugin-vue -D
+# eslint-plugin-vue # 为Vue项目提供了额外的规则，如Vue模板语法的规则
 
 # react
 pnpm i eslint-plugin-react eslint-plugin-react-hooks -D
+# eslint-plugin-react # 为React项目提供了额外的规则，如JSX语法的规则
 
 # vite
 pnpm i vite-plugin-eslint -D
@@ -292,7 +304,9 @@ pnpm i vite-plugin-eslint -D
 // @see: http://eslint.cn
 
 module.exports = {
+  // 指定这是根配置文件，停止在父级目录中寻找
   root: true,
+  // 设置代码运行环境，这里设置为Node.js, browser, es6
   env: {
     browser: true,
     node: true,

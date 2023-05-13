@@ -13,10 +13,12 @@ module.exports = {
     node: true,
     es6: true,
   },
-  /* 指定如何解析语法 */
-  parser: "@typescript-eslint/parser",
-  /* 优先级低于 parse 的语法解析配置 */
+  // vue
+  // 指定如何解析语法
+  parser: "vue-eslint-parser",
+  // vue 优先级低于 parse 的语法解析配置
   parserOptions: {
+    parser: "@typescript-eslint/parser",
     ecmaVersion: 2020,
     sourceType: "module",
     jsxPragma: "React",
@@ -24,6 +26,17 @@ module.exports = {
       jsx: true,
     },
   },
+  /* react 指定如何解析语法 */
+  // parser: "@typescript-eslint/parser",
+  /* react 优先级低于 parse 的语法解析配置 */
+  // parserOptions: {
+  //   ecmaVersion: 2020,
+  //   sourceType: "module",
+  //   jsxPragma: "React",
+  //   ecmaFeatures: {
+  //     jsx: true,
+  //   },
+  // },
   // react
   // plugins: ["react", "@typescript-eslint", "react-hooks", "prettier"],
   /* 继承某些已有的规则 */
