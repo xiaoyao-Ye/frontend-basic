@@ -1,5 +1,9 @@
 # Base
 
+## npx
+
+npx命令会现在本地找是否安装了这个包, 如果已经安装了会直接运行, 如果本地没有安装会先去远程找到安装并运行, 运行完毕后删除.
+
 ## Git 提交规范
 
 - feat: 新功能、新特性
@@ -55,6 +59,15 @@ pnpm i git-cz -D
 - [ ] TODO: 可设置配置文件跟 @commitlint/cli @commitlint/config-conventional 一起使用等. https://commitlint.js.org/
 
 ## commitlint
+
+```bash
+pnpm i @commitlint/cli @commitlint/config-conventional -D
+# @commitlint/prompt-cli
+```
+
+echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+
+在 commit-msg 时机配置执行 npx commitlint --edit ${1}
 
 - [ ] TODO: commitlint https://commitlint.js.org/
 
@@ -472,7 +485,6 @@ stats.html
   "scripts": {
     // 初始化: package.json 文件配置如下 scripts, 当 install 的时候会初始化 `simple-git-hooks`
     "postinstall": "simple-git-hooks",
-    "lint-staged": "lint-staged",
     // 本地提交, 需要自己 git add 指定文件 后运行命令
     "commit": "git-cz",
     // 远程提交, 一次将当前所有更改 commit 并 push 到远程
@@ -487,9 +499,9 @@ stats.html
   // 配置项: https://github.com/toplenboren/simple-git-hooks
   "simple-git-hooks": {
     // git commit 之前执行 lint-staged
-    "pre-commit": "npm run lint-staged",
+    "pre-commit": "npx lint-staged",
     // git commit 的时候执行
-    "commit-msg": "commitlint -E"
+    "commit-msg": "npx commitlint -e ${1}"
   },
   // 执行 lint-staged 的时候配置eslint检查和prettier格式化代码, 也可配置在 lint-staged.config.cjs 文件中
   "lint-staged": {
